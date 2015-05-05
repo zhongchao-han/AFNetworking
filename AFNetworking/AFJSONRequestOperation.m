@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import "AFJSONRequestOperation.h"
+#import "JSONKit.h"
 
 static dispatch_queue_t json_request_operation_processing_queue() {
     static dispatch_queue_t af_json_request_operation_processing_queue;
@@ -77,6 +78,10 @@ static dispatch_queue_t json_request_operation_processing_queue() {
 
             if (data) {
                 self.responseJSON = [NSJSONSerialization JSONObjectWithData:data options:self.JSONReadingOptions error:&error];
+                if(error){
+                    error = nil;
+                    self.responseJSON = [data objectFromJSONDataWithParseOptions:JKParseOptionLooseUnicode error:& error];
+                }
             } else {
                 NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
                 [userInfo setValue:@"Operation responseData failed decoding as a UTF-8 string" forKey:NSLocalizedDescriptionKey];

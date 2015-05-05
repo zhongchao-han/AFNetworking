@@ -5,6 +5,12 @@
       location = "group:AFNetworking"
       name = "AFNetworking">
       <FileRef
+         location = "group:JSONKit.h">
+      </FileRef>
+      <FileRef
+         location = "group:JSONKit.m">
+      </FileRef>
+      <FileRef
          location = "group:AFHTTPClient.h">
       </FileRef>
       <FileRef
